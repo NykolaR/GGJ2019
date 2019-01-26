@@ -10,14 +10,20 @@ var envLawn = load("res://Scenes/Environment/lawn.tscn")
 var envPaved = load("res://Scenes/Environment/paved.tscn")
 var envRoadH = load("res://Scenes/Environment/roadH.tscn")
 var envRoadV = load("res://Scenes/Environment/roadV.tscn")
+var playerScn = load("res://Scenes/Player/Player.tscn")
 var envIntersection = load("res://Scenes/Environment/intersection.tscn")
+var envLandingZone = load("res://Scenes/Environment/LandingZone.tscn")
 var scenes
 var houses
+var landingZone
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	buildMap()
 	populateHouses()
+	addLandingZone()
+	spawnPlayer()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,7 +50,7 @@ func buildMap():
 			scenes[r][c].translation.x = (20*r)
 			scenes[r][c].translation.z = (-20*c)
 			add_child(scenes[r][c])
-			
+
 func populateHouses():
 	houses = []
 	for r in range(Procedural.ROWS):
@@ -93,4 +99,25 @@ func populateHouses():
 					houses[r][c].rotation.y = deg2rad(180);
 				">":
 					houses[r][c].rotation.y = deg2rad(0);
+					
+func addLandingZone():
+	landingZone = envLandingZone.instance()
+	add_child(landingZone)
+	landingZone.translation.x = Procedural.goalLocation[0] * 20
+	landingZone.translation.z = Procedural.goalLocation[1] * -20
+	match Procedural.goalDirection:
+		"^":
+			landingZone.rotation.y = deg2rad(270);
+		"v":
+			landingZone.rotation.y = deg2rad(90);
+		"<":
+			landingZone.rotation.y = deg2rad(0);
+		">":
+			landingZone.rotation.y = deg2rad(180);
 			
+func spawnPlayer ():
+	player = playerScn.instance()
+	player.translation.x = Procedural.startingLocation[0] * 20
+	player.translation.z = Procedural.startingLocation[1] * -20
+	add_child(player)
+	pass

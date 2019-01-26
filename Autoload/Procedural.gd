@@ -14,7 +14,9 @@ const TILE_WIDTH = 20
 var world_grid
 var control
 var scenes
+var goalLocation
 var goalDirection
+var startingLocation
 
 func _ready():
 	world_grid = []
@@ -143,8 +145,8 @@ func pickStartingPlace():
 			    world_grid[r][c] == "-" or
 			    world_grid[r][c] == "+"):
 				locations.append([r,c])
-	var starting = locations[randi()%(locations.size())]
-	control[starting[0]][starting[1]] = "O"
+	startingLocation = locations[randi()%(locations.size())]
+	control[startingLocation[0]][startingLocation[1]] = "O"
 
 func pickDestinationLot():
 	var possibleLots = []
@@ -156,9 +158,10 @@ func pickDestinationLot():
 				control[r][c] == "v" and 
 				int(world_grid[r][c]) < 8):
 				possibleLots.append([r,c])
-	var goal = possibleLots[randi()%(possibleLots.size())]
-	goalDirection = control[goal[0]][goal[1]]
-	control[goal[0]][goal[1]] = "X"
+	goalLocation = possibleLots[randi()%(possibleLots.size())]
+	goalDirection = control[goalLocation[0]][goalLocation[1]]
+	print (goalDirection)
+	control[goalLocation[0]][goalLocation[1]] = "X"
 
 func printWorldNice():
 	var outString = ""
