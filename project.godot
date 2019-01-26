@@ -23,10 +23,6 @@ _global_script_class_icons={
 config/name="GGJ2019"
 config/icon="res://icon.png"
 
-[autoload]
-
-Procedural="*res://Autoload/Procedural.gd"
-
 [input]
 
 ls_up={
