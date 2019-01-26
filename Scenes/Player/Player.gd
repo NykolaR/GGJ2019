@@ -64,7 +64,12 @@ func movement(delta : float) -> void:
 	
 	if not movement == Vector2():
 		#transform.basis.z = transform.basis.z.linear_interpolate(movement3.normalized(), 1 - pow(0.25, delta))
-		pass
+		var t = transform.looking_at(movement3 + transform.origin, Vector3.UP)
+		
+		#transform.interpolate_with(t, 1 - pow(0.25, delta))
+		transform = t
+		
+		#$Rotation.look_at($Rotation.global_transform.origin - movement3, Vector3.UP)
 	
 	#print(transform.basis.z)
 	
