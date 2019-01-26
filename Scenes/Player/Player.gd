@@ -19,8 +19,6 @@ func _ready() -> void:
 		for i in $Mesh.get_surface_material_count():
 			$Mesh.set_surface_material(i, building.get_surface_material(i))
 		
-		add_child(building)
-		
 		if building.has_node("col/shape2"):
 			$Collision.shape = building.get_node("col/shape2").shape
 		else:
