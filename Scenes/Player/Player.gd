@@ -14,10 +14,10 @@ func _ready() -> void:
 	building = Houses.get_residential_house()
 	
 	if building:
-		$Mesh.mesh = building.mesh
+		$Collision/Mesh.mesh = building.mesh
 		
-		for i in $Mesh.get_surface_material_count():
-			$Mesh.set_surface_material(i, building.get_surface_material(i))
+		for i in $Collision/Mesh.get_surface_material_count():
+			$Collision/Mesh.set_surface_material(i, building.get_surface_material(i))
 		
 		if building.has_node("col/shape2"):
 			$Collision.shape = building.get_node("col/shape2").shape
@@ -64,17 +64,27 @@ func movement(delta : float) -> void:
 	
 	if not movement == Vector2():
 		#transform.basis.z = transform.basis.z.linear_interpolate(movement3.normalized(), 1 - pow(0.25, delta))
-		var t = transform.looking_at(movement3 + transform.origin, Vector3.UP)
+		var t = $Collision.transform.looking_at(-movement3 + $Collision.transform.origin, Vector3.UP)
 		
 		#transform.interpolate_with(t, 1 - pow(0.25, delta))
-		transform = t
+		
+		var old_quat = Quat($Collision.transform.basis)
+		var new_quat = Quat(t.basis)
+		
+		var newer_quat = old_quat.slerp(new_quat, 1 - pow(0.8, delta))
+		
+		#$Collision.transform.interpolate_with(t, 1 - pow(0.01, delta))
+		$Collision.transform.interpolate_with(t, 1)
+		
+		$Collision.transform.basis = Basis(newer_quat)
+		#$Collision.transform = t
 		
 		#$Rotation.look_at($Rotation.global_transform.origin - movement3, Vector3.UP)
 	
 	#print(transform.basis.z)
 	
 	#var coldata = move_and_slide(movement3 * movement_speed, Vector3.UP, true)
-	var coldata = move_and_slide(transform.basis.z * current_speed * MAX_SPEED, Vector3.UP, true)
+	var coldata = move_and_slide($Collision.transform.basis.z * current_speed * MAX_SPEED, Vector3.UP, true)
 
 func update_camera(delta : float) -> void:
 	var horizontal = Input.get_action_strength("rs_left") - Input.get_action_strength("rs_right")
