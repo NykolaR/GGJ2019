@@ -1,0 +1,64 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "Building",
+"language": "GDScript",
+"path": "res://Scenes/Buildings/building.gd"
+} ]
+_global_script_class_icons={
+"Building": ""
+}
+
+[application]
+
+config/name="GGJ2019"
+config/icon="res://icon.png"
+
+[input]
+
+ls_up={
+"deadzone": 0.1,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+ls_down={
+"deadzone": 0.1,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+ ]
+}
+ls_left={
+"deadzone": 0.1,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+ls_right={
+"deadzone": 0.1,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+rs_left={
+"deadzone": 0.1,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":-1.0,"script":null)
+ ]
+}
+rs_right={
+"deadzone": 0.1,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":1.0,"script":null)
+ ]
+}
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/directional_shadow/size=8192
+quality/shadows/filter_mode=2
+environment/default_environment="res://default_env.tres"
