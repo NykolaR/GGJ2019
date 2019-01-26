@@ -52,15 +52,16 @@ func movement(delta : float) -> void:
 	var vertical = Input.get_action_strength("ls_up") - Input.get_action_strength("ls_down")
 	
 	var movement : Vector2 = Vector2(horizontal, vertical).rotated(-$Camera_Rot.rotation.y)
+	var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
 	
 	var extreme : float = movement.length_squared()
+	if (movement3.dot($Collision.transform.basis.z) < 0):
+		extreme *= -1
 	
 	if current_speed < extreme:
 		current_speed = min(current_speed + 0.6 * delta, 1)
 	else:
-		current_speed = max(current_speed - 0.3 * delta, 0)
-	
-	var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
+		current_speed = max(current_speed - 0.3 * delta, -1)
 	
 	if not movement == Vector2():
 		#transform.basis.z = transform.basis.z.linear_interpolate(movement3.normalized(), 1 - pow(0.25, delta))
@@ -97,4 +98,4 @@ func update_camera(delta : float) -> void:
 		$Camera_Rot/Cam.transform.origin = Vector3(0, 11, -14) * 0.9
 
 func set_current_speed(new_speed : float) -> void:
-	current_speed = clamp(new_speed, 0.0, 1.0)
+	current_speed = clamp(new_speed, -1.0, 1.0)
