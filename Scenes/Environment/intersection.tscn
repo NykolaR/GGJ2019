@@ -2,7 +2,7 @@
 
 [sub_resource type="PlaneMesh" id=1]
 
-size = Vector2( 25, 25 )
+size = Vector2( 20, 20 )
 
 [sub_resource type="SpatialMaterial" id=2]
 
@@ -10,11 +10,11 @@ albedo_color = Color( 0.498039, 0.498039, 0.498039, 1 )
 
 [sub_resource type="PlaneMesh" id=3]
 
-size = Vector2( 25, 2 )
+size = Vector2( 20, 2 )
 
 [sub_resource type="PlaneMesh" id=4]
 
-size = Vector2( 2, 25 )
+size = Vector2( 2, 20 )
 
 [node name="Spatial" type="MeshInstance"]
 mesh = SubResource( 1 )

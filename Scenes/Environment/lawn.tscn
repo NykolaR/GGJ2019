@@ -2,7 +2,7 @@
 
 [sub_resource type="PlaneMesh" id=1]
 
-size = Vector2( 25, 25 )
+size = Vector2( 20, 20 )
 
 [sub_resource type="SpatialMaterial" id=2]
 

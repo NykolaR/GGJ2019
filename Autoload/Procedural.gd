@@ -9,7 +9,8 @@ var maxRowStreets = 6
 var minColStreets = 3
 var maxColStreets = 5
 var replaceChance = 3 # / 10
-
+var tileWidth = 20
+	
 var world_grid
 var control
 var scenes
