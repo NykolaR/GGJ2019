@@ -7,6 +7,7 @@ onready var Houses = preload("res://Scenes/Buildings/HouseFactory.tscn").instanc
 # var b = "text"
 
 var envLawn = load("res://Scenes/Environment/lawn.tscn")
+var envPaved = load("res://Scenes/Environment/paved.tscn")
 var envRoadH = load("res://Scenes/Environment/roadH.tscn")
 var envRoadV = load("res://Scenes/Environment/roadV.tscn")
 var envIntersection = load("res://Scenes/Environment/intersection.tscn")
@@ -25,9 +26,9 @@ func _ready():
 
 func buildMap():
 	scenes = []
-	for r in range(Procedural.rows):
+	for r in range(Procedural.ROWS):
 		scenes.append([])
-		for c in range(Procedural.cols):
+		for c in range(Procedural.COLS):
 			match Procedural.world_grid[r][c]:
 				"|": 
 					scenes[r].append(envRoadV.instance())
@@ -36,16 +37,19 @@ func buildMap():
 				"+":
 					scenes[r].append(envIntersection.instance())
 				_:
-					scenes[r].append(envLawn.instance())
+					if (int(Procedural.world_grid[r][c]) > 7):
+						scenes[r].append(envPaved.instance())
+					else:
+						scenes[r].append(envLawn.instance())
 			scenes[r][c].translation.x = (20*r)
 			scenes[r][c].translation.z = (-20*c)
 			add_child(scenes[r][c])
 			
 func populateHouses():
 	houses = []
-	for r in range(Procedural.rows):
+	for r in range(Procedural.ROWS):
 		houses.append([])
-		for c in range(Procedural.cols):
+		for c in range(Procedural.COLS):
 			var building
 			if (Procedural.control[r][c] != " " and 
 			    Procedural.control[r][c] != "X"):
