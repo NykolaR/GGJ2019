@@ -32,6 +32,13 @@ func _input(event : InputEvent) -> void:
 
 func _physics_process(delta : float) -> void:
 	movement(delta)
+	
+	for i in get_slide_count():
+		var coldata = get_slide_collision(i)
+		
+		if coldata.collider is Interactable:
+			coldata.collider.set_rigid()
+	
 	update_camera(delta)
 
 func movement(delta : float) -> void:
@@ -49,7 +56,7 @@ func movement(delta : float) -> void:
 	if movement != Vector2():
 		var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
 		
-		move_and_slide(movement3 * movement_speed, Vector3.UP, true)
+		var coldata = move_and_slide(movement3 * movement_speed, Vector3.UP, true)
 
 func update_camera(delta : float) -> void:
 	var horizontal = Input.get_action_strength("rs_left") - Input.get_action_strength("rs_right")
