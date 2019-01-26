@@ -11,13 +11,12 @@ var camera_sens : float = 3.0
 
 func _ready() -> void:
 	# set building and grab building data
-	#var building_scene = load("res://Scenes/Buildings/houses.tscn")
-	#ResourceLoader.load("res://Scenes/Buildings/building.tscn").
 	building = Houses.get_random_house()
 	
 	if building:
 		$Mesh.mesh = building.mesh
-		#$Mesh.mesh = building._get_mesh()
+		for i in $Mesh.get_surface_material_count():
+			$Mesh.set_surface_material(i, building.get_surface_material(i))
 		
 		if building.has_node("col/shape2"):
 			$Collision.shape = building.get_node("col/shape2").shape

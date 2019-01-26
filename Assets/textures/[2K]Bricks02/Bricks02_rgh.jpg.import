@@ -2,23 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bricks02_rgh.jpg-90050b296ff9a59184872c017930a957.stex"
+path.s3tc="res://.import/Bricks02_rgh.jpg-90050b296ff9a59184872c017930a957.s3tc.stex"
+path.etc2="res://.import/Bricks02_rgh.jpg-90050b296ff9a59184872c017930a957.etc2.stex"
 
 [deps]
 
 source_file="res://Assets/textures/[2K]Bricks02/Bricks02_rgh.jpg"
-dest_files=[ "res://.import/Bricks02_rgh.jpg-90050b296ff9a59184872c017930a957.stex" ]
+dest_files=[ "res://.import/Bricks02_rgh.jpg-90050b296ff9a59184872c017930a957.s3tc.stex", "res://.import/Bricks02_rgh.jpg-90050b296ff9a59184872c017930a957.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=true
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
@@ -27,5 +28,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
