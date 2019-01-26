@@ -2,7 +2,7 @@ extends KinematicBody
 
 const MAX_SPEED = 10.0
 
-onready var Houses = preload("res://Scenes/Buildings/houses.tscn").instance()
+onready var Houses = preload("res://Scenes/Buildings/HouseFactory.tscn").instance()
 
 var building : MeshInstance = null
 var movement_speed : float = 10.0
@@ -11,12 +11,15 @@ var camera_sens : float = 3.0
 
 func _ready() -> void:
 	# set building and grab building data
-	building = Houses.get_random_house()
+	building = Houses.get_residential_house()
 	
 	if building:
 		$Mesh.mesh = building.mesh
+		
 		for i in $Mesh.get_surface_material_count():
 			$Mesh.set_surface_material(i, building.get_surface_material(i))
+		
+		add_child(building)
 		
 		if building.has_node("col/shape2"):
 			$Collision.shape = building.get_node("col/shape2").shape

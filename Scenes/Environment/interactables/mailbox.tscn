@@ -26,6 +26,8 @@ extents = Vector3( 0.287458, 0.451087, 0.320095 )
 extents = Vector3( 0.120315, 1.20626, 0.0986974 )
 
 [node name="Spatial" type="RigidBody"]
+collision_layer = 4
+collision_mask = 7
 mode = 1
 script = ExtResource( 1 )
 
