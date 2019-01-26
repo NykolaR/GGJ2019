@@ -1,6 +1,6 @@
 extends KinematicBody
 
-const MAX_SPEED = 10.0
+const MAX_SPEED = 100.0
 
 onready var Houses = preload("res://Scenes/Buildings/HouseFactory.tscn").instance()
 
@@ -53,10 +53,23 @@ func movement(delta : float) -> void:
 	
 	var movement : Vector2 = Vector2(horizontal, vertical).rotated(-$Camera_Rot.rotation.y)
 	
-	if movement != Vector2():
-		var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
-		
-		var coldata = move_and_slide(movement3 * movement_speed, Vector3.UP, true)
+	var extreme : float = movement.length_squared()
+	
+	if current_speed < extreme:
+		current_speed = min(current_speed + 0.6 * delta, 1)
+	else:
+		current_speed = max(current_speed - 0.3 * delta, 0)
+	
+	var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
+	
+	if not movement == Vector2():
+		#transform.basis.z = transform.basis.z.linear_interpolate(movement3.normalized(), 1 - pow(0.25, delta))
+		pass
+	
+	#print(transform.basis.z)
+	
+	#var coldata = move_and_slide(movement3 * movement_speed, Vector3.UP, true)
+	var coldata = move_and_slide(transform.basis.z * current_speed * MAX_SPEED, Vector3.UP, true)
 
 func update_camera(delta : float) -> void:
 	var horizontal = Input.get_action_strength("rs_left") - Input.get_action_strength("rs_right")
@@ -69,4 +82,4 @@ func update_camera(delta : float) -> void:
 		$Camera_Rot/Cam.transform.origin = Vector3(0, 11, -14) * 0.9
 
 func set_current_speed(new_speed : float) -> void:
-	current_speed = clamp(new_speed, 0.0, MAX_SPEED)
+	current_speed = clamp(new_speed, 0.0, 1.0)
