@@ -2,21 +2,28 @@ extends KinematicBody
 
 const MAX_SPEED = 10.0
 
-var building : Building = null
+onready var Houses = preload("res://Scenes/Buildings/houses.tscn").instance()
+
+var building : MeshInstance = null
 var movement_speed : float = 10.0
 var current_speed : float = 0.0 setget set_current_speed
 var camera_sens : float = 3.0
 
 func _ready() -> void:
 	# set building and grab building data
-	var building_scene = load("res://Scenes/Buildings/building.tscn")
+	#var building_scene = load("res://Scenes/Buildings/houses.tscn")
 	#ResourceLoader.load("res://Scenes/Buildings/building.tscn").
-	building = building_scene.instance()
+	building = Houses.get_random_house()
 	
 	if building:
-		$Mesh.mesh = building._get_mesh()
+		$Mesh.mesh = building.mesh
+		#$Mesh.mesh = building._get_mesh()
 		
-		$Collision.shape = building._get_collision_shape()
+		if building.has_node("col/shape2"):
+			$Collision.shape = building.get_node("col/shape2").shape
+		else:
+			print("ERR: convex collision shape not found!")
+		#$Collision.shape = building._get_collision_shape()
 	
 	# Other stuff?
 
