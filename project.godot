@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Building",
 "language": "GDScript",
 "path": "res://Scenes/Buildings/building.gd"
+}, {
+"base": "RigidBody",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://Scenes/Environment/interactables/interactable.gd"
 } ]
 _global_script_class_icons={
-"Building": ""
+"Building": "",
+"Interactable": ""
 }
 
 [application]

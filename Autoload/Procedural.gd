@@ -1,15 +1,15 @@
 extends Node
 
 # do we need self anywhere?
-var rows = 20
-var cols = 20
-var numberZones = 10
-var minRowStreets = 4
-var maxRowStreets = 6
-var minColStreets = 3
-var maxColStreets = 5
-var replaceChance = 3 # / 10
-var tileWidth = 20
+const ROWS = 20
+const COLS = 20
+const NUMBER_ZONES = 10
+const MIN_ROW_STREETS = 4
+const MAX_ROW_STREETS = 6
+const MIN_COL_STREETS = 3
+const MAX_COL_STREETS = 5
+const replaceChance = 3 # / 10
+const TILE_WIDTH = 20
 	
 var world_grid
 var control
@@ -19,10 +19,10 @@ var goalDirection
 func _ready():
 	world_grid = []
 	control = []
-	for r in range(rows):
+	for r in range(ROWS):
 		world_grid.append ([])
 		control.append([])
-		for c in range(cols):
+		for c in range(COLS):
 			world_grid[r].append("L")
 			control[r].append(" ")
 	addVerticalCols()
@@ -36,38 +36,38 @@ func _ready():
 	printControlNice()
 
 func addVerticalCols():
-	var colStreetsDiff = maxColStreets - minColStreets
+	var colStreetsDiff = MAX_COL_STREETS - MIN_COL_STREETS
 	var c = 0
 	var offset = randi() % colStreetsDiff
 	print (offset)
 	c += offset
-	while c < cols:	
-		for r in range(rows):
+	while c < COLS:	
+		for r in range(ROWS):
 			world_grid[r][c] = "|"
-		offset = randi() % colStreetsDiff + minColStreets
+		offset = randi() % colStreetsDiff + MIN_COL_STREETS
 		print (offset)
 		c += offset
 
 #always call me after addVerticalRows. :)
 func addHorizontalRows():
-	var rowStreetsDiff = maxRowStreets - minRowStreets
+	var rowStreetsDiff = MAX_ROW_STREETS - MIN_ROW_STREETS
 	var r = 0
 	var offset = randi()%rowStreetsDiff
 	r += offset
-	while r < rows:	
-		for c in range(cols):
+	while r < ROWS:	
+		for c in range(COLS):
 			if (world_grid[r][c]=="|"):
 				world_grid[r][c] = "+"
 			else:
 				world_grid[r][c] = "-"
-		offset = randi() % rowStreetsDiff + minRowStreets
+		offset = randi() % rowStreetsDiff + MIN_ROW_STREETS
 		r += offset
 	
 # this is where care is needed to ensure there is always a path to the goal.
 func combineAdjacent():
 	# this function is shyte. Don't use it. 
-	for r in range(rows):
-		for c in range(cols):
+	for r in range(ROWS):
+		for c in range(COLS):
 			if ((world_grid[r][c]=="|" or 
 			    world_grid[r][c]=="-" or 
 			    world_grid[r][c]=="+") and
@@ -75,10 +75,10 @@ func combineAdjacent():
 					world_grid[r][c] = "L"
 	
 func addZones():
-	for r in range (rows):
-		for c in range (cols):
+	for r in range (ROWS):
+		for c in range (COLS):
 			if (world_grid[r][c] == "L"):
-				var region = randi()%numberZones
+				var region = randi()%NUMBER_ZONES
 				var stackRC = []
 				world_grid[r][c] = String(region)
 				stackRC.append([r+1,c])
@@ -86,8 +86,8 @@ func addZones():
 				while stackRC.size()>0:
 					var tuple = stackRC[0]
 					stackRC.remove(0)
-					if (tuple[0] < rows and
-					    tuple[1] < cols and
+					if (tuple[0] < ROWS and
+					    tuple[1] < COLS and
 					    world_grid[tuple[0]][tuple[1]] == "L"):
 						world_grid[tuple[0]][tuple[1]] = String(region)
 						stackRC.append([tuple[0]+1,tuple[1]])
@@ -100,12 +100,12 @@ func flipCoin():
 		return false
 
 func findHouseDirections():
-	for r in range (rows):
-		for c in range (cols):
+	for r in range (ROWS):
+		for c in range (COLS):
 			var roadUp = r-1 >= 0      and world_grid[r-1][c] == "-"
-			var roadDown = r+1 < rows  and world_grid[r+1][c] == "-"
+			var roadDown = r+1 < ROWS  and world_grid[r+1][c] == "-"
 			var roadLeft = c-1 >= 0    and world_grid[r][c-1] == "|"
-			var roadRight = c+1 < cols and world_grid[r][c+1] == "|"
+			var roadRight = c+1 < COLS and world_grid[r][c+1] == "|"
 			if   roadUp   and roadLeft:
 				if (flipCoin()):
 					control[r][c] = "^"
@@ -137,8 +137,8 @@ func findHouseDirections():
             
 func pickStartingPlace():
 	var locations = []
-	for r in range (rows):
-		for c in range (cols):
+	for r in range (ROWS):
+		for c in range (COLS):
 			if (world_grid[r][c] == "|" or
 			    world_grid[r][c] == "-" or
 			    world_grid[r][c] == "+"):
@@ -148,8 +148,8 @@ func pickStartingPlace():
 
 func pickDestinationLot():
 	var possibleLots = []
-	for r in range (rows):
-		for c in range (cols):
+	for r in range (ROWS):
+		for c in range (COLS):
 			if (control[r][c] == ">" or
 			    control[r][c] == "<" or
 			    control[r][c] == "^" or
@@ -162,16 +162,16 @@ func pickDestinationLot():
 
 func printWorldNice():
 	var outString = ""
-	for r in range(rows):
-		for c in range(cols):
+	for r in range(ROWS):
+		for c in range(COLS):
 			outString += world_grid[r][c] + " "
 		outString += "\n"
 	print (outString)
 
 func printControlNice():
 	var outString = ""
-	for r in range(rows):
-		for c in range(cols):
+	for r in range(ROWS):
+		for c in range(COLS):
 			outString += control[r][c] + " "
 		outString += "\n"
 	print (outString)
