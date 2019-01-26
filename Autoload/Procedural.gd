@@ -13,6 +13,7 @@ var replaceChance = 3 # / 10
 var world_grid
 var control
 var scenes
+var goalDirection
 
 func _ready():
 	world_grid = []
@@ -26,12 +27,12 @@ func _ready():
 	addVerticalCols()
 	addHorizontalRows()
 	#combineAdjacent()
-	pickStartingPlace()
 	addZones()
 	findHouseDirections()
+	pickStartingPlace()
+	pickDestinationLot()
 	printWorldNice()
 	printControlNice()
-	pass
 
 func addVerticalCols():
 	var colStreetsDiff = maxColStreets - minColStreets
@@ -145,7 +146,19 @@ func pickStartingPlace():
 	control[starting[0]][starting[1]] = "O"
 	
 func pickDestinationLot():
-	pass
+	var possibleLots = []
+	for r in range (rows):
+		for c in range (cols):
+			if (control[r][c] == ">" or
+			    control[r][c] == "<" or
+			    control[r][c] == "^" or
+				control[r][c] == "v"):
+				possibleLots.append([r,c])
+	var goal = possibleLots[randi()%(possibleLots.size())]
+	goalDirection = control[goal[0]][goal[1]]
+	control[goal[0]][goal[1]] = "X"
+			
+	
 				
 func printWorldNice():
 	var outString = ""
@@ -163,26 +176,3 @@ func printControlNice():
 		outString += "\n"
 	print (outString)
 	
-# run me after running everything else. :)
-func buildMap():
-	var envLawn = load("res://Scenes/Environment/lawn.tscn")
-	var envRoadH = load("res://Scenes/Environment/roadH.tscn")
-	var envRoadV = load("res://Scenes/Environment/roadV.tscn")
-	var envIntersection = load("res://Scenes/Environment/intersection.tscn")
-	scenes = []
-	for r in range(rows):
-		scenes.append([])
-		for c in range(cols):
-			match world_grid[r][c]:
-				"|": 
-					scenes.append[envRoadV.instance()]
-					add_child(scenes[r][c])
-				"-":
-					scenes.append[envRoadH.instance()]
-					add_child(scenes[r][c])
-				"+":
-					scenes.append[envIntersection.instance()]
-					add_child(scenes[r][c])
-				_:
-					scenes.append[envLawn.instance()]
-					add_child(scenes[r][c])
