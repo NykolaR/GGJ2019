@@ -134,7 +134,7 @@ func findHouseDirections():
 				control[r][c] = ">"
 			elif roadLeft:
 				control[r][c] = "<"
-	            
+            
 func pickStartingPlace():
 	var locations = []
 	for r in range (rows):
@@ -145,7 +145,7 @@ func pickStartingPlace():
 				locations.append([r,c])
 	var starting = locations[randi()%(locations.size())]
 	control[starting[0]][starting[1]] = "O"
-	
+
 func pickDestinationLot():
 	var possibleLots = []
 	for r in range (rows):
@@ -153,14 +153,13 @@ func pickDestinationLot():
 			if (control[r][c] == ">" or
 			    control[r][c] == "<" or
 			    control[r][c] == "^" or
-				control[r][c] == "v"):
+				control[r][c] == "v" and 
+				int(world_grid[r][c]) < 8):
 				possibleLots.append([r,c])
 	var goal = possibleLots[randi()%(possibleLots.size())]
 	goalDirection = control[goal[0]][goal[1]]
 	control[goal[0]][goal[1]] = "X"
-			
-	
-				
+
 func printWorldNice():
 	var outString = ""
 	for r in range(rows):
@@ -168,7 +167,7 @@ func printWorldNice():
 			outString += world_grid[r][c] + " "
 		outString += "\n"
 	print (outString)
-	
+
 func printControlNice():
 	var outString = ""
 	for r in range(rows):
@@ -176,4 +175,3 @@ func printControlNice():
 			outString += control[r][c] + " "
 		outString += "\n"
 	print (outString)
-	
