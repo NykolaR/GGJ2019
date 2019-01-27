@@ -1,8 +1,8 @@
 extends Node
 
 # do we need self anywhere?
-const ROWS = 20
-const COLS = 20
+const ROWS = 10
+const COLS = 10
 const NUMBER_ZONES = 10
 const MIN_ROW_STREETS = 4
 const MAX_ROW_STREETS = 6

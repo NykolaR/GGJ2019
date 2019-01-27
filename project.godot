@@ -72,9 +72,14 @@ rs_right={
 3d_physics/layer_2="houses"
 3d_physics/layer_3="environment"
 
+[physics]
+
+3d/active_soft_world=false
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
+threads/thread_model=2
 quality/directional_shadow/size=8192
 quality/shadows/filter_mode=2
 environment/default_environment="res://default_env.tres"

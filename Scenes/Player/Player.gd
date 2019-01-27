@@ -4,7 +4,7 @@ const MAX_SPEED = 100.0
 
 onready var Houses = preload("res://Scenes/Buildings/HouseFactory.tscn").instance()
 
-var building : MeshInstance = null
+var building : Spatial = null
 var movement_speed : float = 10.0
 var current_speed : float = 0.0 setget set_current_speed
 var camera_sens : float = 3.0
@@ -12,17 +12,18 @@ var camera_sens : float = 3.0
 func _ready() -> void:
 	# set building and grab building data
 	building = Houses.get_residential_house()
+	#add_child(building)
 	
-	if building:
-		$Collision/Mesh.mesh = building.mesh
-		
-		for i in $Collision/Mesh.get_surface_material_count():
-			$Collision/Mesh.set_surface_material(i, building.get_surface_material(i))
-		
-		if building.has_node("col/shape2"):
-			$Collision.shape = building.get_node("col/shape2").shape
-		else:
-			print("ERR: convex collision shape not found!")
+	#if building:
+	#	$Collision/Mesh.mesh = building.mesh
+	#	
+	#	for i in $Collision/Mesh.get_surface_material_count():
+	#		$Collision/Mesh.set_surface_material(i, building.get_surface_material(i))
+	#	
+	#	if building.has_node("col/shape2"):
+	#		$Collision.shape = building.get_node("col/shape2").shape
+	#	else:
+	#		print("ERR: convex collision shape not found!")
 		#$Collision.shape = building._get_collision_shape()
 	
 	# Other stuff?
@@ -75,7 +76,7 @@ func movement(delta : float) -> void:
 		var old_quat = Quat($Collision.transform.basis)
 		var new_quat = Quat(t.basis)
 		
-		var newer_quat = old_quat.slerp(new_quat, 1 - pow(0.8, delta))
+		var newer_quat = old_quat.slerp(new_quat, 1 - pow(0.5, delta))
 		
 		$Collision.transform.interpolate_with(t, 1)
 		

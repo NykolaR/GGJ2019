@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Buildings/houses.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Buildings/residential_base.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Buildings/breakable_buildings/brick_house_1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Buildings/skyscraper_base.tscn" type="PackedScene" id=3]
 
 [node name="HouseFactory" type="Node"]
