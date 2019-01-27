@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
+
+[node name="Explanation" type="Spatial"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 66.8446
+margin_top = 44.3421
+margin_right = 2510.84
+margin_bottom = 226.342
+text = "In this game you play as a house. You wake up on the wrong side of town and need to get back to your lot as quickly as possible so no one notices. 
+Be warned - the longer you take the more the lot becomes depreciated, and the more damage you take, the less your house value is. 
+Your final score is based on your remaining value and how precisely you set down on the lot, including the direction and distance from the center."
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 114.558
+margin_top = 200.969
+margin_right = 386.558
+margin_bottom = 323.969
+text = "Direction-Based Controls"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 726.54
+margin_top = 197.462
+margin_right = 998.54
+margin_bottom = 320.462
+text = "Tank-Based"
+
+[node name="Label4" type="Label" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 280.302
+margin_top = 135.478
+margin_right = 760.302
+margin_bottom = 258.478
+text = "Press L or R to switch control styles. Press any face button to plant."
+
+[node name="Label5" type="Label" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 464.198
+margin_top = 237.977
+margin_right = 944.198
+margin_bottom = 360.977
+text = "Live Demo"
+
+[node name="ViewportContainer" type="ViewportContainer" parent="CanvasLayer"]
+margin_left = 189.0
+margin_top = 268.0
+margin_right = 826.0
+margin_bottom = 585.0
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="CanvasLayer/ViewportContainer"]
+arvr = true
+size = Vector2( 512, 256 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Player" parent="CanvasLayer/ViewportContainer/Viewport" instance=ExtResource( 1 )]
+

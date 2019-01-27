@@ -14,14 +14,19 @@ var envLandingZone = load("res://Scenes/Environment/LandingZone.tscn")
 var genLevel
 var player
 var landingZone
+var penaltyScale
+var totalValue
+var lockedIn
 
 func _ready():
+	lockedIn = false
 	spawnPlayer()
 	addLandingZone()
 	genLevel = genLevelScene.instance()
 	add_child(genLevel)
 	
 	lotValue = STARTING_LOT_VALUE
+	houseValue = STARTING_HOUSE_VALUE
 	var distance = abs(int(Procedural.startingLocation[0]) \
 	             - int(Procedural.goalLocation[0])) + \
 			       abs (int(Procedural.startingLocation[1]) \
@@ -34,22 +39,26 @@ func _ready():
 	var farness = float(distance) / float(maxDistance)
 	var closeness = 1 - farness
 	lotDecay = BASE_DECAY + SLOPE_DECAY * closeness
-	
 		
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	lotValue -= lotDecay * delta
 	
-	if (Input.is_action_just_pressed("ui_accept")):
+	if not lockedIn:
+		lotValue -= lotDecay * delta * 100
+		if lotValue < 0:
+			lotValue = 0
 		checkMyScore()
+		updateGui()
+		if (Input.is_action_just_pressed("ui_accept")):
+			lockIn()
+	
 
 func checkMyScore():
 	var playerLocation = Vector2(player.translation.x, player.translation.z)
 	var destinationLocation = Vector2(Procedural.goalLocation[0]*20, Procedural.goalLocation[1]*-20)
 	var distance = (playerLocation - destinationLocation).length()
-	var penaltyScale
 	# print (distance) # Thi   s is like 300-500 if far away
 	# goal is player should keep this under 1. -10% / point.
 	if (distance >= 5):
@@ -61,15 +70,22 @@ func checkMyScore():
 	if cosineAngle < 0:
 		penaltyScale = 1.0
 	else:
-		penaltyScale += 0.5 * (1.0 - cosineAngle)	
-	print (penaltyScale)
+		penaltyScale += 0.5 * (1.0 - cosineAngle)
+	if (penaltyScale > 1.0):
+		penaltyScale = 1.0
+	totalValue = (1.0-penaltyScale)*(houseValue+lotValue)
+	
+func updateGui():
+	var text = "Current Value of House....." + str(houseValue).pad_decimals(2) + "\n Current Value of Lot...." + str(lotValue).pad_decimals(2) + " \n Current Distance from Lot Penalty...." + str(penaltyScale*100).pad_decimals(0) + "%\n 	Total Cash in Value..." + str(totalValue).pad_decimals(2)
+	var label = get_node("CanvasLayer/Control/TextureRect/Label")
+	label.text = text
 	
 func spawnPlayer ():
 	player = playerScn.instance()
 	player.translation.x = Procedural.startingLocation[0] * 20
 	player.translation.z = Procedural.startingLocation[1] * -20
-	player.translation.y = 0.1
 	add_child(player)
+	
 	
 func addLandingZone():
 	landingZone = envLandingZone.instance()
@@ -77,3 +93,9 @@ func addLandingZone():
 	landingZone.translation.x = Procedural.goalLocation[0] * 20
 	landingZone.translation.z = Procedural.goalLocation[1] * -20
 	landingZone.rotation.y = Procedural.destinationRotation
+	
+func lockIn():
+	lockedIn = true
+	var text = "Final Value....." + str(totalValue).pad_decimals(2)
+	var label = get_node("CanvasLayer/Control/TextureRect/Label")
+	label.text = text

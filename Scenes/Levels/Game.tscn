@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Levels/GameLogic.gd" type="Script" id=1]
+[ext_resource path="res://Assets/textures/Gui/roundedRect.tga" type="Texture" id=2]
+
+[node name="Game" type="Spatial"]
+editor/display_folded = true
+
+[node name="GameLogic" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameLogic"]
+
+[node name="Control" type="Control" parent="GameLogic/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.41333
+margin_top = 6.0
+margin_right = 3.58667
+margin_bottom = 4.0
+
+[node name="TextureRect" type="TextureRect" parent="GameLogic/CanvasLayer/Control"]
+anchor_bottom = 1.0
+margin_left = 4.4025
+margin_top = 506.766
+margin_right = 783.402
+margin_bottom = -5.23407
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="GameLogic/CanvasLayer/Control/TextureRect"]
+margin_left = 11.0
+margin_top = 11.0
+margin_right = 284.0
+margin_bottom = 76.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Current Value of House.....0
+Current Value of Lot....0
+Current Distance from Lot Penalty....0
+Total Cash in Value...0"
+
