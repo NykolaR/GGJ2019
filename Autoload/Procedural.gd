@@ -17,6 +17,7 @@ var scenes
 var goalLocation
 var goalDirection
 var startingLocation
+var destinationRotation
 
 func _ready():
 	world_grid = []
@@ -162,6 +163,15 @@ func pickDestinationLot():
 	goalDirection = control[goalLocation[0]][goalLocation[1]]
 	print (goalDirection)
 	control[goalLocation[0]][goalLocation[1]] = "X"
+	match Procedural.goalDirection:
+		"^":
+			destinationRotation = deg2rad(270);
+		"v":
+			destinationRotation =  deg2rad(90);
+		"<":
+			destinationRotation =  deg2rad(0);
+		">":
+			destinationRotation =  deg2rad(180);
 
 func printWorldNice():
 	var outString = ""
