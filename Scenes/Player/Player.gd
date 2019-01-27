@@ -43,7 +43,10 @@ func _ready() -> void:
 	# Other stuff?
 
 func _input(event : InputEvent) -> void:
-	pass
+	if(event.is_action_pressed("l_button")):
+		Settings.tank_controls = false;
+	if(event.is_action_pressed("r_button")):
+		Settings.tank_controls = true;
 
 func _physics_process(delta : float) -> void:
 	movement(delta)
@@ -68,7 +71,12 @@ func movement(delta : float) -> void:
 	var horizontal = Input.get_action_strength("ls_left") - Input.get_action_strength("ls_right")
 	var vertical = Input.get_action_strength("ls_up") - Input.get_action_strength("ls_down")
 	
-	var movement : Vector2 = Vector2(horizontal, vertical).rotated(-$Camera_Rot.rotation.y)
+	var movement : Vector2 
+	if (Settings.tank_controls):
+		movement = Vector2(horizontal, vertical)
+	else:
+		movement = Vector2(horizontal, vertical).rotated(-$Camera_Rot.rotation.y)
+	
 	var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
 	
 	var extreme : float = movement.length_squared()
