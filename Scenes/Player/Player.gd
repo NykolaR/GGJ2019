@@ -21,6 +21,10 @@ func _ready() -> void:
 		child.connect("body_entered", child, "set_rigid_arg")
 	for child in $Collision/Collision4.get_children():
 		child.connect("body_entered", child, "set_rigid_arg")
+	for child in $Collision/Collision5.get_children():
+		child.connect("body_entered", child, "set_rigid_arg")
+	for child in $Collision/Collision6.get_children():
+		child.connect("body_entered", child, "set_rigid_arg")
 	
 	#add_child(building)
 	
@@ -75,6 +79,9 @@ func movement(delta : float) -> void:
 		current_speed = min(current_speed + 0.6 * delta, 1)
 	else:
 		current_speed = max(current_speed - 0.3 * delta, -1)
+	
+	if abs(extreme) < 0.05 and abs(current_speed) < 0.05:
+		current_speed = 0
 	
 	if not movement == Vector2():
 		var t

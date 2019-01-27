@@ -14,13 +14,17 @@ func set_rigid_arg(arg) -> void:
 		return
 	
 	mode = MODE_RIGID
-	var global_t = global_transform.origin
+	var global_t = global_transform
 	
 	var parent = get_node("../../../")
+	
+	if parent.current_speed:
+		parent.current_speed *= 0.2
+	
 	get_parent().remove_child(self)
 	parent.get_node("Node").add_child(self)
 	
-	translation = global_t
+	transform = global_t
 	
 	#collision_mask = 15
 	
