@@ -12,6 +12,10 @@ var camera_sens : float = 3.0
 func _ready() -> void:
 	# set building and grab building data
 	building = Houses.get_residential_house()
+	
+	for child in $Collision.get_children():
+		child.connect("body_entered", child, "set_rigid_arg")
+	
 	#add_child(building)
 	
 	#if building:
