@@ -38,6 +38,8 @@ func _physics_process(delta : float) -> void:
 		
 		if coldata.collider is Interactable:
 			coldata.collider.set_rigid()
+		
+		current_speed *= 0.3
 	
 	update_camera(delta)
 
@@ -80,6 +82,8 @@ func movement(delta : float) -> void:
 		$Collision.transform.basis = Basis(newer_quat)
 	
 	var coldata = move_and_slide($Collision.transform.basis.z * current_speed * MAX_SPEED, Vector3.UP, true)
+	
+	translation.y = 0
 
 func update_camera(delta : float) -> void:
 	var horizontal = Input.get_action_strength("rs_left") - Input.get_action_strength("rs_right")

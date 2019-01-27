@@ -25,6 +25,8 @@ collision_mask = 7
 
 [node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, -2.99003e-08, 0.939693, 0.34202, 8.21505e-08, 0.34202, -0.939693, 0, 11, -14 )
+current = true
+far = 1000.0
 target = NodePath("../Camera_Rot/Cam")
 speed = 10.0
 enabled = true

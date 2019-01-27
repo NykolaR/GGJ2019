@@ -25,7 +25,7 @@ size = Vector2( 1, 6.5 )
 albedo_color = Color( 0.694118, 0.439216, 0.0470588, 1 )
 
 [node name="Spatial" type="MeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.137613, -0.0444558, 0.0852804 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.137613, 0.285705, 0.0852804 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 

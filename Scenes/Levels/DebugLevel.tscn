@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/HDRI/binnenalster_2k.hdr" type="Texture" id=2]
 [ext_resource path="res://Scenes/Environment/interactables/mailbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Buildings/breakable_buildings/brick_house_1.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -42,4 +43,7 @@ shape = SubResource( 4 )
 
 [node name="mailbox" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9595, 2.49702, 0 )
+
+[node name="Spatial" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.9359 )
 
