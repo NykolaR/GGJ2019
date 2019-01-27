@@ -18,7 +18,7 @@ func set_rigid_arg(arg) -> void:
 	
 	var parent = get_node("../../../")
 	
-	if parent.current_speed:
+	if not parent.current_speed == null:
 		parent.current_speed *= 0.2
 	
 	get_parent().remove_child(self)
@@ -31,6 +31,7 @@ func set_rigid_arg(arg) -> void:
 	if not translation == Vector3():
 		collision_mask = 7
 		dead = true
+		arg.collision_layer = 0
 	
 	if arg.has_method("set_rigid"):
 		arg.set_rigid()

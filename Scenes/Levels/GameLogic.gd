@@ -71,7 +71,6 @@ func spawnPlayer ():
 	player.translation.y = 0.1
 	add_child(player)
 	
-	
 func addLandingZone():
 	landingZone = envLandingZone.instance()
 	add_child(landingZone)
