@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/Buildings/breakables/breakable_wall_2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Environment/interactables/interactable.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Scenes/Buildings/breakables/breakable_wall_1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Environment/interactables/mailbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Buildings/door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/textures/[2K]WoodFloor14/WoodFloor14_col.jpg" type="Texture" id=7]
+[ext_resource path="res://Assets/textures/[2K]WoodFloor14/WoodFloor14_nrm.jpg" type="Texture" id=8]
+[ext_resource path="res://Assets/textures/[2K]WoodFloor14/WoodFloor14_rgh.jpg" type="Texture" id=9]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -223,6 +226,19 @@ surfaces/0 = {
 [sub_resource type="ConvexPolygonShape" id=24]
 
 points = PoolVector3Array( 0.87567, 1.1585, 5.79029e-08, -0.884781, -0.92961, -3.33711e-08, 0.87567, -0.92961, -3.33711e-08, -0.0301743, 0.147349, 2.54204e-10, -0.853246, -0.393527, -1.66333e-08, 0.0168591, 0.946904, 2.52183e-08, -0.853246, -0.393527, -0.7, 0.87567, -0.92961, -0.7, -0.884781, -0.92961, -0.7, -0.0301743, 0.147349, -0.7, 0.87567, 1.1585, -0.7, 0.0168591, 0.946904, -0.7, 0.87567, -0.92961, -3.33711e-08, -0.884781, -0.92961, -0.7, 0.87567, -0.92961, -0.7, -0.884781, -0.92961, -3.33711e-08, 0.87567, 1.1585, -0.7, 0.87567, -0.92961, -3.33711e-08, 0.87567, -0.92961, -0.7, 0.87567, 1.1585, 5.79029e-08, -0.853246, -0.393527, -1.66333e-08, -0.884781, -0.92961, -0.7, -0.884781, -0.92961, -3.33711e-08, -0.853246, -0.393527, -0.7, -0.0301743, 0.147349, 2.54204e-10, -0.853246, -0.393527, -0.7, -0.853246, -0.393527, -1.66333e-08, -0.0301743, 0.147349, -0.7, 0.0168591, 0.946904, 2.52183e-08, -0.0301743, 0.147349, -0.7, -0.0301743, 0.147349, 2.54204e-10, 0.0168591, 0.946904, -0.7, 0.87567, 1.1585, 5.79029e-08, 0.0168591, 0.946904, -0.7, 0.0168591, 0.946904, 2.52183e-08, 0.87567, 1.1585, -0.7 )
+
+[sub_resource type="SpatialMaterial" id=25]
+
+albedo_texture = ExtResource( 7 )
+roughness_texture = ExtResource( 9 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 8 )
+
+[sub_resource type="PlaneMesh" id=26]
+
+material = SubResource( 25 )
+size = Vector2( 10, 10 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -588,4 +604,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.583, 5.15 )
 collision_layer = 2
 collision_mask = 7
 mode = 1
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+mesh = SubResource( 26 )
+material/0 = null
 
