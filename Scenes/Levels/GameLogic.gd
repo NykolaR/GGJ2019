@@ -68,6 +68,7 @@ func spawnPlayer ():
 	player = playerScn.instance()
 	player.translation.x = Procedural.startingLocation[0] * 20
 	player.translation.z = Procedural.startingLocation[1] * -20
+	player.translation.y = 0.1
 	add_child(player)
 	
 	

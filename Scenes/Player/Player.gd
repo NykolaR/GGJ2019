@@ -101,7 +101,7 @@ func movement(delta : float) -> void:
 	
 	var coldata = move_and_slide($Collision.transform.basis.z * current_speed * MAX_SPEED, Vector3.UP, true)
 	
-	translation.y = 0
+	translation.y = 0.1
 
 func update_camera(delta : float) -> void:
 	var horizontal = Input.get_action_strength("rs_left") - Input.get_action_strength("rs_right")
