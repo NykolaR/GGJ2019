@@ -7,11 +7,14 @@ func _ready():
 	pass
 
 func set_rigid() -> void:
+	#get_tree().call_group("ScoreKeeper", "DeductScore")
 	mode = MODE_RIGID
 
 func set_rigid_arg(arg) -> void:
 	if dead:
 		return
+	
+	get_tree().call_group("ScoreKeeper", "DeductScore")
 	
 	mode = MODE_RIGID
 	var global_t = global_transform

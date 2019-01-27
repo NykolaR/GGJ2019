@@ -80,6 +80,7 @@ func movement(delta : float) -> void:
 	var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
 	
 	var extreme : float = movement.length_squared()
+	
 	if (movement3.dot($Collision.transform.basis.z) < 0):
 		extreme *= -1
 	

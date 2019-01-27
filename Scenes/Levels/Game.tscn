@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Levels/GameLogic.gd" type="Script" id=1]
 [ext_resource path="res://Assets/textures/Gui/roundedRect.tga" type="Texture" id=2]
+[ext_resource path="res://Assets/textures/Gui/roundedRectRed.tga" type="Texture" id=3]
+[ext_resource path="res://Assets/textures/Gui/roundedRectGreen.tga" type="Texture" id=4]
 
 [node name="Game" type="Spatial"]
-editor/display_folded = true
 
-[node name="GameLogic" type="Node" parent="."]
+[node name="GameLogic" type="Node" parent="." groups=[
+"ScoreKeeper",
+]]
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameLogic"]
@@ -19,7 +22,7 @@ margin_top = 6.0
 margin_right = 3.58667
 margin_bottom = 4.0
 
-[node name="TextureRect" type="TextureRect" parent="GameLogic/CanvasLayer/Control"]
+[node name="Blue" type="TextureRect" parent="GameLogic/CanvasLayer/Control"]
 anchor_bottom = 1.0
 margin_left = 4.4025
 margin_top = 506.766
@@ -27,11 +30,33 @@ margin_right = 783.402
 margin_bottom = -5.23407
 texture = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="GameLogic/CanvasLayer/Control/TextureRect"]
-margin_left = 11.0
-margin_top = 11.0
-margin_right = 284.0
-margin_bottom = 76.0
+[node name="Red" type="TextureRect" parent="GameLogic/CanvasLayer/Control"]
+visible = false
+anchor_bottom = 1.0
+margin_left = 4.4025
+margin_top = 506.766
+margin_right = 783.402
+margin_bottom = -5.23407
+texture = ExtResource( 3 )
+
+[node name="Green" type="TextureRect" parent="GameLogic/CanvasLayer/Control"]
+visible = false
+anchor_bottom = 1.0
+margin_left = 4.4025
+margin_top = 506.766
+margin_right = 783.402
+margin_bottom = -5.23407
+texture = ExtResource( 4 )
+
+[node name="TextureRect2" type="TextureRect" parent="GameLogic/CanvasLayer/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="GameLogic/CanvasLayer/Control/TextureRect2"]
+margin_left = 15.4025
+margin_top = 517.766
+margin_right = 288.402
+margin_bottom = 582.766
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Current Value of House.....0
 Current Value of Lot....0
