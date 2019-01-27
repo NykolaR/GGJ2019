@@ -529,6 +529,7 @@ script = ExtResource( 1 )
 [node name="Node" type="Node" parent="."]
 
 [node name="legs" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="Spatial" type="Spatial" parent="legs"]
 
