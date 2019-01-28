@@ -27,6 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GGJ2019"
+run/main_scene="res://Scenes/Levels/Title.tscn"
 config/icon="res://icon.png"
 
 [autoload]

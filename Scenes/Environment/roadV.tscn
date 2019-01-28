@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/textures/[2K]Asphalt10/Asphalt10_col.jpg" type="Texture" id=1]
 [ext_resource path="res://Assets/textures/[2K]PaintedPlaster04/PaintedPlaster04_col.jpg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/textures/[2K]PaintedPlaster04/PaintedPlaster04_nrm.jpg" type="Texture" id=4]
 [ext_resource path="res://Assets/textures/[2K]Asphalt10/Asphalt10_nrm.jpg" type="Texture" id=5]
 [ext_resource path="res://Assets/textures/[2K]Asphalt10/Asphalt10_rgh.jpg" type="Texture" id=6]
+[ext_resource path="res://Scenes/Environment/interactables/lightpost.tscn" type="PackedScene" id=7]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -28,4 +29,10 @@ detail_normal = ExtResource( 4 )
 [node name="Spatial" type="MeshInstance"]
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
+
+[node name="lightpost" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.51007, 9.30865, -9.18958 )
+
+[node name="lightpost2" parent="." instance=ExtResource( 7 )]
+transform = Transform( -1, -2.59388e-10, -8.74224e-08, 0, 0.999996, -0.00296706, 8.74228e-08, -0.00296706, -0.999996, 8.58289, 9.30865, 9.37111 )
 

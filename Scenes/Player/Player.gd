@@ -68,6 +68,8 @@ func movement(delta : float) -> void:
 	
 	# LS Input only effects momentum amount and rotating towards direction.
 	
+	
+	
 	var horizontal = Input.get_action_strength("ls_left") - Input.get_action_strength("ls_right")
 	var vertical = Input.get_action_strength("ls_up") - Input.get_action_strength("ls_down")
 	
@@ -77,7 +79,25 @@ func movement(delta : float) -> void:
 	else:
 		movement = Vector2(horizontal, vertical).rotated(-$Camera_Rot.rotation.y)
 	
+	if not $AnimationPlayer.is_playing():
+		if movement.length_squared() > 0.1:
+			$AnimationPlayer.play("start")
+		else:
+			return
+	
+	if $AnimationPlayer.is_playing():
+		if $AnimationPlayer.current_animation == "run":
+			$AnimationPlayer.playback_speed = current_speed * 5
+			if abs(current_speed) < 0.1 and movement.length_squared() < 0.1:
+				$AnimationPlayer.play("end")
+				$AnimationPlayer.playback_speed = 1
+		if $AnimationPlayer.current_animation == "start":
+			return
+		if $AnimationPlayer.current_animation == "end":
+			return
+	
 	var movement3 : Vector3 = Vector3(movement.x, 0.0, movement.y)
+	
 	
 	var extreme : float = movement.length_squared()
 	
@@ -110,7 +130,7 @@ func movement(delta : float) -> void:
 	
 	var coldata = move_and_slide($Collision.transform.basis.z * current_speed * MAX_SPEED, Vector3.UP, true)
 	
-	translation.y = 0.1
+	#translation.y += 0.1
 
 func update_camera(delta : float) -> void:
 	var horizontal = Input.get_action_strength("rs_left") - Input.get_action_strength("rs_right")

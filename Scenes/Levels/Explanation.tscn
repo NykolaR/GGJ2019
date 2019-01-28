@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Levels/Explanation.gd" type="Script" id=1]
 [ext_resource path="res://Assets/textures/Gui/roundedRectGreen.tga" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Scenes/Environment/lawn.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Environment/roadV.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Environment/roadH.tscn" type="PackedScene" id=7]
+
+[sub_resource type="PlaneShape" id=1]
+
 
 [node name="Explanation" type="Spatial"]
 script = ExtResource( 1 )
@@ -117,4 +120,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20 )
 
 [node name="Spatial9" parent="CanvasLayer/ViewportContainer/Viewport/Spatial" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20 )
+
+[node name="StaticBody" type="StaticBody" parent="CanvasLayer/ViewportContainer/Viewport/Spatial"]
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="CanvasLayer/ViewportContainer/Viewport/Spatial/StaticBody"]
+shape = SubResource( 1 )
 

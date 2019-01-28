@@ -20,6 +20,28 @@ var startingLocation
 var destinationRotation
 
 func _ready():
+	randomize()
+	randomize()
+	randomize()
+	world_grid = []
+	control = []
+	for r in range(ROWS):
+		world_grid.append ([])
+		control.append([])
+		for c in range(COLS):
+			world_grid[r].append("L")
+			control[r].append(" ")
+	addVerticalCols()
+	addHorizontalRows()
+	#combineAdjacent()
+	addZones()
+	findHouseDirections()
+	pickStartingPlace()
+	pickDestinationLot()
+	printWorldNice()
+	printControlNice()
+
+func newLevel():
 	world_grid = []
 	control = []
 	for r in range(ROWS):
@@ -42,13 +64,13 @@ func addVerticalCols():
 	var colStreetsDiff = MAX_COL_STREETS - MIN_COL_STREETS
 	var c = 0
 	var offset = randi() % colStreetsDiff
-	print (offset)
+	#print (offset)
 	c += offset
 	while c < COLS:	
 		for r in range(ROWS):
 			world_grid[r][c] = "|"
 		offset = randi() % colStreetsDiff + MIN_COL_STREETS
-		print (offset)
+		#print (offset)
 		c += offset
 
 #always call me after addVerticalRows. :)

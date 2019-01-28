@@ -48,7 +48,7 @@ func _ready():
 	             - int(Procedural.goalLocation[0])) + \
 			       abs (int(Procedural.startingLocation[1]) \
    	             - int(Procedural.goalLocation[1]))
-	print (distance)
+	#print (distance)
 	var maxDistance = Procedural.ROWS + Procedural.COLS
 	# farness will approach 1 if very very far, 0 if very near
 	# the higher the value of farness, the slower that the
@@ -69,13 +69,14 @@ func _process(delta):
 		checkMyScore()
 		updateGui()
 		if (Input.is_action_just_pressed("ui_accept")):
-			if (lockedIn):
 				lockIn()
-			else:
-				nextLevel()
+	else: 
+		if (Input.is_action_just_pressed("ui_accept")):
+			nextLevel()
 	
 func nextLevel():
-	pass
+	Procedural.newLevel()
+	get_tree().change_scene("res://Scenes/Levels/Game.tscn")
 	
 func checkMyScore():
 	var playerLocation = Vector2(player.translation.x, player.translation.z)

@@ -13,6 +13,6 @@ func _process(delta):
 	if (Input.is_action_just_pressed("ui_accept")):
 		Begin()
 	
-func Begin()
-	print ("game should begin now")
+func Begin():
+	get_tree().change_scene("res://Scenes/Levels/Explanation.tscn")
 	

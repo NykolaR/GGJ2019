@@ -16,5 +16,7 @@ func _process(delta):
 	else:
 		get_node("CanvasLayer/Control/TextureRect2").visible = true;
 		get_node("CanvasLayer/Control/TextureRect3").visible = false;
-		
 	pass
+
+	if (Input.is_action_just_pressed("ui_accept")):
+		get_tree().change_scene("res://Scenes/Levels/Game.tscn")
