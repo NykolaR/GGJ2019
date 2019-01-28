@@ -23,6 +23,7 @@ margin_bottom = 784.957
 texture = ExtResource( 2 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+visible = false
 margin_left = 694.342
 margin_top = 90.3105
 margin_right = 995.342
@@ -33,6 +34,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "HOmE"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+visible = false
 margin_left = 696.012
 margin_top = 279.042
 margin_right = 997.012
@@ -43,6 +45,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "HOmE"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+visible = false
 margin_left = 668.012
 margin_top = 207.322
 margin_right = 1052.01
@@ -53,6 +56,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "AwAY FROm"
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+visible = false
 margin_left = 587.504
 margin_top = 511.746
 margin_right = 1291.5
@@ -61,4 +65,44 @@ rect_pivot_offset = Vector2( -35.6702, 306.989 )
 custom_fonts/normal_font = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Press (X) to Begin"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 694.342
+margin_top = 90.3105
+margin_right = 995.342
+margin_bottom = 182.311
+rect_pivot_offset = Vector2( -125.649, 276.649 )
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "HOmE"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 587.504
+margin_top = 511.746
+margin_right = 1291.5
+margin_bottom = 711.746
+rect_pivot_offset = Vector2( -35.6702, 306.989 )
+custom_fonts/normal_font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Press (X) to Begin"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 668.012
+margin_top = 207.322
+margin_right = 1052.01
+margin_bottom = 407.322
+rect_pivot_offset = Vector2( -35.6702, 306.989 )
+custom_fonts/normal_font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "AwAY FROm"
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="CanvasLayer/Control/TextureRect"]
+margin_left = 696.012
+margin_top = 279.042
+margin_right = 997.012
+margin_bottom = 371.042
+rect_pivot_offset = Vector2( -125.649, 276.649 )
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "HOmE"
 

@@ -9,6 +9,8 @@ func _ready():
 func set_rigid() -> void:
 	#get_tree().call_group("ScoreKeeper", "DeductScore")
 	mode = MODE_RIGID
+	
+	apply_impulse(Vector3(), Vector3(randf(), randf(), randf()))
 
 func set_rigid_arg(arg) -> void:
 	if dead:
