@@ -1,22 +1,14 @@
 extends Spatial
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+#onready var dir_controls
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Settings.tank_controls):
-		get_node("CanvasLayer/Control/TextureRect2").visible = false;
-		get_node("CanvasLayer/Control/TextureRect3").visible = true;
-	else:
-		get_node("CanvasLayer/Control/TextureRect2").visible = true;
-		get_node("CanvasLayer/Control/TextureRect3").visible = false;
-	pass
-
+	#if (Settings.tank_controls):
+	#	get_node("CanvasLayer/Control/TextureRect2").visible = false;
+	#	get_node("CanvasLayer/Control/TextureRect3").visible = true;
+	#else:
+	#	get_node("CanvasLayer/Control/TextureRect2").visible = true;
+	#	get_node("CanvasLayer/Control/TextureRect3").visible = false;
+	
 	if (Input.is_action_just_pressed("ui_accept")):
 		get_tree().change_scene("res://Scenes/Levels/Game.tscn")

@@ -19,6 +19,11 @@ var totalValue
 var lockedIn
 var gameOver = false
 
+
+
+onready var display = $display
+onready var label = $display/label
+
 func DeductScore ():
 	houseValue -= 7000
 	if houseValue < 0:
@@ -30,12 +35,13 @@ func gameOver():
 		gameOver = true
 		lockedIn = true
 		var text = "Game Over - Your House is Worthless. \nPress (X) to start a new level"
-		var label = get_node("CanvasLayer/Control/TextureRect2/Label")
-		get_node("CanvasLayer/Control/Blue").visible = false
-		get_node("CanvasLayer/Control/Red").visible = true
+		
+		display.self_modulate = Settings.RED
 		label.text = text
 
 func _ready():
+	display.self_modulate = Settings.BLUE
+	
 	lockedIn = false
 	spawnPlayer()
 	addLandingZone()
@@ -56,10 +62,7 @@ func _ready():
 	var farness = float(distance) / float(maxDistance)
 	var closeness = 1 - farness
 	lotDecay = BASE_DECAY + SLOPE_DECAY * closeness
-		
-	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	if not lockedIn:
@@ -73,7 +76,7 @@ func _process(delta):
 	else: 
 		if (Input.is_action_just_pressed("ui_accept")):
 			nextLevel()
-	
+
 func nextLevel():
 	Procedural.newLevel()
 	get_tree().change_scene("res://Scenes/Levels/Game.tscn")
@@ -99,8 +102,10 @@ func checkMyScore():
 	totalValue = (1.0-penaltyScale)*(houseValue+lotValue)
 	
 func updateGui():
-	var text = "Current Value of House....." + str(houseValue).pad_decimals(2) + "\n Current Value of Lot...." + str(lotValue).pad_decimals(2) + " \n Current Distance from Lot Penalty...." + str(penaltyScale*100).pad_decimals(0) + "%\n 	Total Cash in Value..." + str(totalValue).pad_decimals(2)
-	var label = get_node("CanvasLayer/Control/TextureRect2/Label")
+	var text = "Current Value of House....." + str(houseValue).pad_decimals(2)
+	text += "\n Current Value of Lot...." + str(lotValue).pad_decimals(2)
+	text += " \n Current Distance from Lot Penalty...." + str(penaltyScale*100).pad_decimals(0)
+	text += "%\n 	Total Cash in Value..." + str(totalValue).pad_decimals(2)
 	label.text = text
 	
 func spawnPlayer ():
@@ -119,8 +124,6 @@ func addLandingZone():
 func lockIn():
 	lockedIn = true
 	var text = "Final Value....." + str(totalValue).pad_decimals(2) + "\n \n Press (X) to start a new level"
-	var label = get_node("CanvasLayer/Control/TextureRect2/Label")
-	get_node("CanvasLayer/Control/Blue").visible = false
-	get_node("CanvasLayer/Control/Green").visible = true
-		
+	
+	display.self_modulate = Settings.GREEN
 	label.text = text
