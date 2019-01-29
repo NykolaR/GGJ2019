@@ -26,20 +26,6 @@ func _ready() -> void:
 	for child in $Collision/Collision6.get_children():
 		child.connect("body_entered", child, "set_rigid_arg")
 	
-	#add_child(building)
-	
-	#if building:
-	#	$Collision/Mesh.mesh = building.mesh
-	#	
-	#	for i in $Collision/Mesh.get_surface_material_count():
-	#		$Collision/Mesh.set_surface_material(i, building.get_surface_material(i))
-	#	
-	#	if building.has_node("col/shape2"):
-	#		$Collision.shape = building.get_node("col/shape2").shape
-	#	else:
-	#		print("ERR: convex collision shape not found!")
-		#$Collision.shape = building._get_collision_shape()
-	
 	# Other stuff?
 
 func _input(event : InputEvent) -> void:
@@ -68,8 +54,6 @@ func movement(delta : float) -> void:
 	
 	# LS Input only effects momentum amount and rotating towards direction.
 	
-	
-	
 	var horizontal = Input.get_action_strength("ls_left") - Input.get_action_strength("ls_right")
 	var vertical = Input.get_action_strength("ls_up") - Input.get_action_strength("ls_down")
 	
@@ -80,7 +64,7 @@ func movement(delta : float) -> void:
 		movement = Vector2(horizontal, vertical).rotated(-$Camera_Rot.rotation.y)
 	
 	if not $AnimationPlayer.is_playing():
-		if movement.length_squared() > 0.1:
+		if movement.length_squared() > 0.04:
 			$AnimationPlayer.play("start")
 		else:
 			return
@@ -90,6 +74,7 @@ func movement(delta : float) -> void:
 			$AnimationPlayer.playback_speed = current_speed * 5
 			if abs(current_speed) < 0.1 and movement.length_squared() < 0.1:
 				$AnimationPlayer.play("end")
+				current_speed = 0
 				$AnimationPlayer.playback_speed = 1
 		if $AnimationPlayer.current_animation == "start":
 			return
@@ -122,7 +107,7 @@ func movement(delta : float) -> void:
 		var old_quat = Quat($Collision.transform.basis)
 		var new_quat = Quat(t.basis)
 		
-		var newer_quat = old_quat.slerp(new_quat, 1 - pow(0.5, delta))
+		var newer_quat = old_quat.slerp(new_quat, 1 - pow(0.3, delta))
 		
 		$Collision.transform.interpolate_with(t, 1)
 		

@@ -1,8 +1,8 @@
 extends Node
 
 # do we need self anywhere?
-const ROWS = 10
-const COLS = 10
+const ROWS = 9
+const COLS = 9
 const NUMBER_ZONES = 10
 const MIN_ROW_STREETS = 4
 const MAX_ROW_STREETS = 6
@@ -10,7 +10,7 @@ const MIN_COL_STREETS = 3
 const MAX_COL_STREETS = 5
 const replaceChance = 3 # / 10
 const TILE_WIDTH = 20
-	
+
 var world_grid
 var control
 var scenes
