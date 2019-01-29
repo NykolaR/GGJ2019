@@ -122,7 +122,6 @@ margin_bottom = 306.0
 rect_min_size = Vector2( 150, 0 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBox/HBoxContainer"]
-editor/display_folded = true
 margin_left = 154.0
 margin_right = 870.0
 margin_bottom = 306.0
@@ -132,7 +131,6 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="VBox/HBoxContainer/ViewportContainer"]
-editor/display_folded = true
 arvr = true
 size = Vector2( 716, 306 )
 handle_input_locally = false
